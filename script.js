@@ -1,8 +1,8 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-function generatePassword(length) {
-  var result = ' ';
+function generatePassword() {
+  var passwordResult = ' ';
   var lowercase = "abcdefghijklmnopqrstuvwxyz";
   var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numbers = "1234567890";
@@ -27,27 +27,69 @@ function generatePassword(length) {
 
   var specialResult = confirm("Click OK to confirm including special characters.");
 
-  var numericResult = confirm("Click OK to confirm including numeric characters.");
+  var numbersResult = confirm("Click OK to confirm including numeric characters.");
 
   var lowercaseResult = confirm("Click OK to confirm including lowercase characters.");
 
   var uppercaseResult = confirm("Click OK to confirm including uppercase characters.");
 
-  for (var i = 0; i < lengthResult; i++) {
-    result += specialCharacters.charAt(Math.floor(Math.random() * specialCharacters.length));
-    result += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    result += lowercase.charAt(Math.floor(Math.random() * lowercase.length));
-    result += uppercase.charAt(Math.floor(Math.random() * uppercase.length));
+  var characterResult;
+
+  if (specialResult && numbersResult && lowercaseResult && uppercaseResult) {
+    characterResult = specialCharacters + numbers + lowercase + uppercase;
+  }
+  else if (specialResult && numbersResult && lowercaseResult && !uppercaseResult) {
+    characterResult = specialCharacters + numbers + lowercase;
+  }
+  else if (specialResult && !numbersResult && lowercaseResult && uppercaseResult) {
+    characterResult = specialCharacters + lowercase + uppercase;
+  }
+  else if (specialResult && numbersResult && !lowercaseResult && uppercaseResult) {
+    characterResult = specialCharacters + numbers + uppercase;
+  }
+  else if (!specialResult && numbersResult && lowercaseResult && uppercaseResult) {
+    characterResult = numbers + lowercase + uppercase;
+  }
+  else if (specialResult && numbersResult && !lowercaseResult && !uppercaseResult) {
+    characterResult = specialCharacters + numbers;
+  }
+  else if (specialResult && !numbersResult && lowercaseResult && !uppercaseResult) {
+    characterResult = specialCharacters + lowercase;
+  }
+  else if (specialResult && !numbersResult && !lowercaseResult && uppercaseResult) {
+    characterResult = specialCharacters + uppercase;
+  }
+  else if (!specialResult && numbersResult && lowercaseResult && !uppercaseResult) {
+    characterResult = number + lowercase;
+  }
+  else if (!specialResult && numbersResult && !lowercaseResult && uppercaseResult) {
+    characterResult = number + uppercase;
+  }
+  else if (!specialResult && !numbersResult && lowercaseResult && uppercaseResult) {
+    characterResult = lowercase + uppercase;
+  }
+  else if (specialResult && !numbersResult && !lowercaseResult && !uppercaseResult) {
+    characterResult = specialCharacters;
+  }
+  else if (!specialResult && numbersResult && !lowercaseResult && !uppercaseResult) {
+    characterResult = numbers;
+  }
+  else if (!specialResult && !numbersResult && lowercaseResult && !uppercaseResult) {
+    characterResult = lowercase;
+  }
+  else if (!specialResult && !numbersResult && !lowercaseResult && uppercaseResult) {
+    characterResult = uppercase;
+  }
+  else {
+    alert("please choose at least 1 character type for your password");
+    return generatePassword();
   }
 
+  for (var i = 0; i < lengthResult; i++) {
+    passwordResult += characterResult.charAt(Math.floor(Math.random() * characterResult.length));
+  };
 
-  // var random = Math.floor(Math.random() * lowercase.length);
-
-  // console.log("RANDOM", random, lowercase[random])
-
-  // alert, prompt, confirm, parseInt(prompt), confirm gets the true false anser with ok and cancel
-
-  return result;
+  return passwordResult;
 }
 
 // Write password to the #password input
