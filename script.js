@@ -1,12 +1,17 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+
 function generatePassword() {
-  var passwordResult = ' ';
+  var passwordResult = [];
   var lowercase = "abcdefghijklmnopqrstuvwxyz";
+  var lowercaseArr = lowercase.split('');
   var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var uppercaseArr = uppercase.split('');
   var numbers = "1234567890";
+  var numbersArr = numbers.split('');
   var specialCharacters = "!#$%&'()*+,./:;<=>?@[\]^_`{|}~";
+  var specialCharArr = specialCharacters.split('');
 
   var lengthResult = parseInt(prompt("How many characters will this password have? (Must be between 8 and 128 characters)"));
 
@@ -33,63 +38,34 @@ function generatePassword() {
 
   var uppercaseResult = confirm("Click OK to confirm including uppercase characters.");
 
-  var characterResult;
+  var characterResult = [];
 
-  if (specialResult && numbersResult && lowercaseResult && uppercaseResult) {
-    characterResult = specialCharacters + numbers + lowercase + uppercase;
+  if (specialResult) {
+    characterResult = characterResult.concat(specialCharArr);
   }
-  else if (specialResult && numbersResult && lowercaseResult && !uppercaseResult) {
-    characterResult = specialCharacters + numbers + lowercase;
+  if (numbersResult) {
+    characterResult = characterResult.concat(numbersArr);
   }
-  else if (specialResult && !numbersResult && lowercaseResult && uppercaseResult) {
-    characterResult = specialCharacters + lowercase + uppercase;
+  if (lowercaseResult) {
+    characterResult = characterResult.concat(lowercaseArr);
   }
-  else if (specialResult && numbersResult && !lowercaseResult && uppercaseResult) {
-    characterResult = specialCharacters + numbers + uppercase;
+  if (uppercaseResult) {
+    characterResult = characterResult.concat(uppercaseArr);
   }
-  else if (!specialResult && numbersResult && lowercaseResult && uppercaseResult) {
-    characterResult = numbers + lowercase + uppercase;
-  }
-  else if (specialResult && numbersResult && !lowercaseResult && !uppercaseResult) {
-    characterResult = specialCharacters + numbers;
-  }
-  else if (specialResult && !numbersResult && lowercaseResult && !uppercaseResult) {
-    characterResult = specialCharacters + lowercase;
-  }
-  else if (specialResult && !numbersResult && !lowercaseResult && uppercaseResult) {
-    characterResult = specialCharacters + uppercase;
-  }
-  else if (!specialResult && numbersResult && lowercaseResult && !uppercaseResult) {
-    characterResult = number + lowercase;
-  }
-  else if (!specialResult && numbersResult && !lowercaseResult && uppercaseResult) {
-    characterResult = number + uppercase;
-  }
-  else if (!specialResult && !numbersResult && lowercaseResult && uppercaseResult) {
-    characterResult = lowercase + uppercase;
-  }
-  else if (specialResult && !numbersResult && !lowercaseResult && !uppercaseResult) {
-    characterResult = specialCharacters;
-  }
-  else if (!specialResult && numbersResult && !lowercaseResult && !uppercaseResult) {
-    characterResult = numbers;
-  }
-  else if (!specialResult && !numbersResult && lowercaseResult && !uppercaseResult) {
-    characterResult = lowercase;
-  }
-  else if (!specialResult && !numbersResult && !lowercaseResult && uppercaseResult) {
-    characterResult = uppercase;
-  }
-  else {
-    alert("please choose at least 1 character type for your password");
+
+  if (!specialResult && !numbersResult && !lowercaseResult && !uppercaseResult) {
+     alert("please choose at least 1 character type for your password");
     return generatePassword();
   }
+  
 
   for (var i = 0; i < lengthResult; i++) {
-    passwordResult += characterResult.charAt(Math.floor(Math.random() * characterResult.length));
+    // passwordResult += characterResult.charAt(Math.floor(Math.random() * characterResult.length));
+    var randomCharacter = characterResult[Math.floor(Math.random() * characterResult.length)]
+    passwordResult.push(randomCharacter)
   };
 
-  return passwordResult;
+  return passwordResult.join('');
 }
 
 // Write password to the #password input
