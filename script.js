@@ -15,19 +15,9 @@ function generatePassword() {
 
   var lengthResult = parseInt(prompt("How many characters will this password have? (Must be between 8 and 128 characters)"));
 
-  if (lengthResult < 8) {
-    alert("Please choose a number between 8 and 128");
-    return generatePassword();
-  }
-
-  if (lengthResult > 128) {
-    alert("Please choose a number between 8 and 128");
-    return generatePassword();
-  }
-
-  if (!lengthResult) {
-    alert("Please choose a number between 8 and 128");
-    return generatePassword();
+  if (!lengthResult || lengthResult < 8 || lengthResult > 128) {
+    alert("Please choose a length between 8 and 128");
+    return passwordResult;
   }
 
   var specialResult = confirm("Click OK to confirm including special characters.");
@@ -38,24 +28,34 @@ function generatePassword() {
 
   var uppercaseResult = confirm("Click OK to confirm including uppercase characters.");
 
+  var stored = [];
+
   var characterResult = [];
 
   if (specialResult) {
     characterResult = characterResult.concat(specialCharArr);
+    var randomCharacter = specialCharArr[Math.floor(Math.random() * specialCharArr.length)]
+    stored = specialCharArr[randomCharacter]
   }
   if (numbersResult) {
     characterResult = characterResult.concat(numbersArr);
+    var randomCharacter = specialCharArr[Math.floor(Math.random() * specialCharArr.length)]
+    stored = specialCharArr[randomCharacter]
   }
   if (lowercaseResult) {
     characterResult = characterResult.concat(lowercaseArr);
+    var randomCharacter = specialCharArr[Math.floor(Math.random() * specialCharArr.length)]
+    stored = specialCharArr[randomCharacter]
   }
   if (uppercaseResult) {
     characterResult = characterResult.concat(uppercaseArr);
+    var randomCharacter = specialCharArr[Math.floor(Math.random() * specialCharArr.length)]
+    stored = specialCharArr[randomCharacter]
   }
 
   if (!specialResult && !numbersResult && !lowercaseResult && !uppercaseResult) {
      alert("please choose at least 1 character type for your password");
-    return generatePassword();
+    return passwordResult;
   }
   
 
