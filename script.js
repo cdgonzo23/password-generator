@@ -23,28 +23,28 @@ function generatePassword() {
   var numbersResult = confirm("Click OK to confirm including numeric characters.");
   var lowercaseResult = confirm("Click OK to confirm including lowercase characters.");
   var uppercaseResult = confirm("Click OK to confirm including uppercase characters.");
-  var stored = [];
+  // var stored = [];
   var characterResult = [];
 
   if (specialResult) {
     characterResult = characterResult.concat(specialCharArr);
-    var randomCharacter = specialCharArr[Math.floor(Math.random() * specialCharArr.length)]
-    stored = randomCharacter.concat(passwordResult)
+    // var randomCharacter = specialCharArr[Math.floor(Math.random() * specialCharArr.length)]
+    // stored = randomCharacter.concat(passwordResult)
   }
   if (numbersResult) {
     characterResult = characterResult.concat(numbersArr);
-    var randomCharacter = numbersArr[Math.floor(Math.random() * numbersArr.length)]
-    stored = randomCharacter.concat(passwordResult)
+    // var randomCharacter = numbersArr[Math.floor(Math.random() * numbersArr.length)]
+    // stored = randomCharacter.concat(passwordResult)
   }
   if (lowercaseResult) {
     characterResult = characterResult.concat(lowercaseArr);
-    var randomCharacter = lowercaseArr[Math.floor(Math.random() * lowercaseArr.length)]
-    stored = randomCharacter.concat(passwordResult)
+    // var randomCharacter = lowercaseArr[Math.floor(Math.random() * lowercaseArr.length)]
+    // stored = randomCharacter.concat(passwordResult)
   }
   if (uppercaseResult) {
     characterResult = characterResult.concat(uppercaseArr);
-    var randomCharacter = uppercaseArr[Math.floor(Math.random() * uppercaseArr.length)]
-    stored = randomCharacter.concat(passwordResult)
+    // var randomCharacter = uppercaseArr[Math.floor(Math.random() * uppercaseArr.length)]
+    // stored = randomCharacter.concat(passwordResult)
   }
 
   if (!specialResult && !numbersResult && !lowercaseResult && !uppercaseResult) {
